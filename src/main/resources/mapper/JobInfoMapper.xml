@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzq.cn.webmagic.dao.JobInfoMapper">
+  <resultMap id="BaseResultMap" type="com.lzq.cn.webmagic.ben.JobInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="wages" jdbcType="INTEGER" property="wages" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, position, company, city, wages, date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jobinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jobinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lzq.cn.webmagic.ben.JobInfo">
+    insert into jobinfo (id, position, company, 
+      city, wages, date)
+    values (#{id,jdbcType=INTEGER}, #{position,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{wages,jdbcType=INTEGER}, #{date,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzq.cn.webmagic.ben.JobInfo">
+    insert into jobinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="wages != null">
+        wages,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="wages != null">
+        #{wages,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzq.cn.webmagic.ben.JobInfo">
+    update jobinfo
+    <set>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="wages != null">
+        wages = #{wages,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzq.cn.webmagic.ben.JobInfo">
+    update jobinfo
+    set position = #{position,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      wages = #{wages,jdbcType=INTEGER},
+      date = #{date,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
